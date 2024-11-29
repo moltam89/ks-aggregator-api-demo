@@ -6,7 +6,7 @@ import { getSigner } from "../libs/signer";
 
 export async function postSwapRouteV1() {
     // Get the path to be called
-    const targetChain = ChainName.MATIC;
+    const targetChain = ChainName.ARBITRUM;
     const targetPath = `/${targetChain}/api/v1/route/build`;
 
     // Get the route summary data to be encoded
