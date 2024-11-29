@@ -3,8 +3,13 @@ import { AggregatorDomain, ChainName } from "../libs/constants";
 import { getSwapRouteV1 } from "./V1Get";
 import { getSigner } from "../libs/signer";
 
+let callCount = 0;
+let successCount = 0;
+let errorCount = 0;
 
 export async function postSwapRouteV1() {
+    callCount++;
+
     // Get the path to be called
     const targetChain = ChainName.ARBITRUM;
     const targetPath = `/${targetChain}/api/v1/route/build`;
@@ -33,10 +38,15 @@ export async function postSwapRouteV1() {
             requestBody
         );
         
+        successCount++;
+
         console.log(`[V1] POST Response:`);
         console.log(data);
         return data.data;
     } catch (error) {
+        errorCount++;
         console.log(error);
-    };
+    }finally{
+        console.log(`Call Count: ${callCount}, Success Count: ${successCount}, Error Count: ${errorCount}`);
+    }
 }
